@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://baccratt-simulation.vercel.app/sitemap.xml
+
+# 크롤링 제한
+Crawl-delay: 10 

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>골든 카지노 - 바카라 시뮬레이션 | 교육용 바카라 게임</title>
+
+    <!-- SEO 메타 태그 -->
+    <meta
+      name="description"
+      content="바카라 게임의 수학적 원리와 큰 수의 법칙을 이해하기 위한 교육용 바카라 시뮬레이션. 실제 카지노와 동일한 규칙과 확률로 구현된 무료 시뮬레이터입니다."
+    />
+    <meta
+      name="keywords"
+      content="바카라, 시뮬레이션, 교육용 게임, 확률, 큰 수의 법칙, 카지노 게임, 바카라 규칙"
+    />
+    <meta name="author" content="BACCARAT SIMULATION" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph 메타 태그 -->
+    <meta
+      property="og:title"
+      content="골든 카지노 - 바카라 시뮬레이션 | 교육용 바카라 게임"
+    />
+    <meta
+      property="og:description"
+      content="바카라 게임의 수학적 원리와 큰 수의 법칙을 이해하기 위한 교육용 바카라 시뮬레이션"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://baccratt-simulation.vercel.app/" />
+    <meta
+      property="og:image"
+      content="https://baccratt-simulation.vercel.app/og-image.jpg"
+    />
+
+    <!-- Twitter 카드 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="골든 카지노 - 바카라 시뮬레이션 | 교육용 바카라 게임"
+    />
+    <meta
+      name="twitter:description"
+      content="바카라 게임의 수학적 원리와 큰 수의 법칙을 이해하기 위한 교육용 바카라 시뮬레이션"
+    />
+    <meta
+      name="twitter:image"
+      content="https://baccratt-simulation.vercel.app/og-image.jpg"
+    />
+
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Noto Serif KR", serif;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      .urgent {
+        color: #ef4444;
+        animation: pulse 1s infinite;
+      }
+
+      #gameContainer canvas {
+        border: none !important;
+        outline: none !important;
+      }
+
+      /* 모바일 반응형 스타일 */
+      @media (max-width: 1024px) {
+        .text-4xl {
+          font-size: 2rem;
+          letter-spacing: 2px;
+        }
+
+        .flex-1.flex.flex-col.gap-4.min-w-\[1400px\] {
+          min-width: 100% !important;
+        }
+
+        .flex.justify-between.w-full.items-start {
+          flex-direction: column;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        #gameContainer {
+          width: 800px !important;
+          height: 400px !important;
+        }
+
+        .w-\[700px\].h-\[500px\] {
+          width: 800px !important;
+          height: auto !important;
+        }
+      }
+
+      @media (max-width: 850px) {
+        #gameContainer {
+          width: 600px !important;
+          height: 300px !important;
+        }
+
+        .w-\[700px\].h-\[500px\] {
+          width: 600px !important;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .text-4xl {
+          font-size: 1.5rem;
+          letter-spacing: 1px;
+        }
+
+        .p-8 {
+          padding: 1rem;
+        }
+
+        .px-8 {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        #gameContainer {
+          width: 100% !important;
+          height: 250px !important;
+        }
+
+        .w-\[700px\].h-\[500px\] {
+          width: 100% !important;
+        }
+
+        .grid.grid-cols-4 {
+          grid-template-columns: 1fr;
+        }
+
+        .gap-8 {
+          gap: 1rem;
+        }
+
+        .p-6 {
+          padding: 1rem;
+        }
+
+        footer .flex {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+
+        footer .text-right {
+          text-align: center;
+        }
+
+        .max-w-\[200px\] {
+          max-width: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-[#0a0a0a] text-white min-h-screen m-0 p-0">
+    <div class="flex flex-col max-w-full mx-auto p-2 min-h-screen gap-4">
+      <!-- 제목 섹션 -->
+      <div class="text-center py-4 border-b-2 border-[#d4af37]/30">
+        <h1
+          class="text-center text-[#d4af37] text-4xl font-bold tracking-[5px] m-0 drop-shadow-lg"
+        >
+          BACCARAT SIMULATION
+        </h1>
+        <p class="text-gray-300 mt-2 text-sm">
+          이 시뮬레이션은 순수하게 바카라 게임의 수학적 원리와 큰 수의 법칙을
+          증명하기 위한 교육용 목적으로 제작되었습니다. 실제 도박이나 금전적
+          이익을 목적으로 하지 않습니다.
+        </p>
+      </div>
+
+      <div class="flex gap-4 justify-center mx-auto max-w-[1800px] w-full">
+        <!-- 게임 섹션 -->
+        <div class="flex-1 flex flex-col gap-4 min-w-[1400px]">
+          <div
+            class="rounded-2xl flex flex-col overflow-hidden justify-center items-center bg-[#141414] border border-[#d4af37]/30 pt-4 px-8 pb-16 relative"
+          >
+            <div class="flex justify-between w-full items-start">
+              <div class="flex flex-col gap-4">
+                <div id="gameContainer" class="w-[1000px] h-[500px]"></div>
+                <div class="flex gap-2 justify-center w-full">
+                  <button
+                    id="shuffleButton"
+                    class="flex-1 max-w-[200px] bg-gradient-to-b from-[#d4af37] to-[#b8860b] text-black rounded-lg px-4 py-2 text-base font-semibold cursor-pointer transition-all hover:from-[#ffd700] hover:to-[#d4af37] hover:-translate-y-0.5"
+                  >
+                    덱 셔플
+                  </button>
+                  <button
+                    id="playButton"
+                    class="flex-1 max-w-[200px] bg-gradient-to-b from-[#d4af37] to-[#b8860b] text-black rounded-lg px-4 py-2 text-base font-semibold cursor-pointer transition-all hover:from-[#ffd700] hover:to-[#d4af37] hover:-translate-y-0.5"
+                  >
+                    게임 시작
+                  </button>
+                </div>
+              </div>
+              <!-- 통계 패널 -->
+              <div
+                class="w-[700px] h-[500px] flex flex-col bg-[#141414]/80 rounded-xl p-3"
+              >
+                <h2
+                  class="text-[#d4af37] text-xl font-bold pb-2 mb-3 border-b border-[#d4af37]/30"
+                >
+                  게임 통계
+                </h2>
+                <div class="flex-1 space-y-4">
+                  <!-- 최근 결과 -->
+                  <div class="flex-1">
+                    <div class="flex justify-between items-center mb-2">
+                      <h3 class="text-yellow-400 text-lg">최근 결과</h3>
+                      <button
+                        id="resetButton"
+                        class="px-2 py-1 text-xs bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
+                      >
+                        초기화
+                      </button>
+                    </div>
+                    <div
+                      class="p-3 bg-black/30 rounded border border-[#b8860b]"
+                    >
+                      <div
+                        id="recentResultsGrid"
+                        class="grid grid-flow-col auto-cols-min gap-1 overflow-x-auto"
+                      >
+                        <!-- 최근 결과가 여기에 동적으로 추가됩니다 -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 승률 분포 -->
+                  <div class="flex-1">
+                    <h3 class="text-yellow-400 text-lg mb-2">승률 분포</h3>
+                    <div
+                      class="p-3 bg-black/30 rounded border border-[#b8860b] space-y-2"
+                    >
+                      <div class="flex justify-between items-center">
+                        <span>플레이어 승률:</span>
+                        <span id="playerWinRate" class="text-blue-400">0%</span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <span>뱅커 승률:</span>
+                        <span id="bankerWinRate" class="text-red-400">0%</span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <span>타이 확률:</span>
+                        <span id="tieRate" class="text-green-400">0%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 게임 컨트롤 -->
+                  <div class="mt-auto pt-4">
+                    <!-- 게임 설정 -->
+                    <div
+                      class="mb-4 p-3 bg-black/30 rounded border border-[#b8860b] space-y-2"
+                    >
+                      <h3 class="text-yellow-400 text-lg mb-2">게임 설정</h3>
+                      <div class="flex items-center justify-between">
+                        <span>게임 속도:</span>
+                        <select
+                          id="gameSpeed"
+                          class="bg-black/50 text-white border border-[#b8860b] rounded px-2 py-1 w-[120px]"
+                        >
+                          <option value="4">극히 느림</option>
+                          <option value="3">매우 느림</option>
+                          <option value="2">느림</option>
+                          <option value="1" selected>보통</option>
+                          <option value="0.5">빠름</option>
+                          <option value="0.25">매우 빠름</option>
+                          <option value="0.1">극히 빠름</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 하단 설명 섹션 -->
+      <div
+        class="grid grid-cols-4 gap-8 p-8 bg-[#141414] border border-[#d4af37]/30 rounded-xl mt-auto max-w-[1800px] mx-auto"
+      >
+        <div class="p-6">
+          <h2
+            class="text-[#d4af37] border-b border-[#d4af37]/30 pb-3 mb-4 text-2xl font-bold"
+          >
+            바카라란?
+          </h2>
+          <p class="mb-3 text-base leading-relaxed">
+            바카라는 19세기 프랑스에서 시작된 카드 게임으로, 플레이어와 뱅커의
+            카드 합이 9에 가까운 쪽이 이기는 게임입니다. 단순한 규칙과 낮은
+            하우스 엣지로 전 세계 카지노에서 인기를 얻고 있으며, 특히 아시아
+            지역에서 큰 사랑을 받고 있습니다.
+          </p>
+          <p class="text-base text-gray-400">
+            * 하우스 엣지: 뱅커 베팅 1.06%, 플레이어 베팅 1.24%
+          </p>
+        </div>
+
+        <div class="p-6">
+          <h2
+            class="text-[#d4af37] border-b border-[#d4af37]/30 pb-3 mb-4 text-2xl font-bold"
+          >
+            게임 규칙
+          </h2>
+          <ul class="list-disc list-inside mb-3 text-base space-y-3">
+            <li>
+              기본 규칙:
+              <ul class="list-inside pl-4 mt-2 space-y-2 text-gray-300">
+                <li>• 각 진영은 2장의 카드를 받음</li>
+                <li>• 합계가 9에 가까운 쪽이 승리</li>
+                <li>• 10, J, Q, K는 0점</li>
+                <li>• A는 1점</li>
+              </ul>
+            </li>
+            <li>
+              점수 계산:
+              <ul class="list-inside pl-4 mt-2 space-y-2 text-gray-300">
+                <li>• 모든 카드의 합은 일의 자리만 사용</li>
+                <li>• 예: 7+8=15 → 5점</li>
+              </ul>
+            </li>
+            <li>
+              추가 규칙:
+              <ul class="list-inside pl-4 mt-2 space-y-2 text-gray-300">
+                <li>• 8, 9는 내추럴로 추가 드로우 없음</li>
+                <li>• 0-5점: 추가 카드 받음</li>
+                <li>• 6-7점: 스탠드</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="p-6">
+          <h2
+            class="text-[#d4af37] border-b border-[#d4af37]/30 pb-3 mb-4 text-2xl font-bold"
+          >
+            승률 분석
+          </h2>
+          <ul class="text-base space-y-4">
+            <li class="flex flex-col gap-2">
+              <span class="text-red-400 text-lg font-semibold"
+                >뱅커 승률: 45.86%</span
+              >
+              <span class="text-gray-400">• 가장 높은 승률</span>
+              <span class="text-gray-400">• 승리 시 5% 커미션</span>
+            </li>
+            <li class="flex flex-col gap-2">
+              <span class="text-blue-400 text-lg font-semibold"
+                >플레이어 승률: 44.62%</span
+              >
+              <span class="text-gray-400">• 커미션 없음</span>
+              <span class="text-gray-400">• 단순한 베팅 방식</span>
+            </li>
+            <li class="flex flex-col gap-2">
+              <span class="text-green-400 text-lg font-semibold"
+                >타이 확률: 9.52%</span
+              >
+              <span class="text-gray-400">• 8:1 또는 9:1 배당</span>
+              <span class="text-gray-400">• 가장 높은 하우스 엣지</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="p-6">
+          <h2
+            class="text-[#d4af37] border-b border-[#d4af37]/30 pb-3 mb-4 text-2xl font-bold"
+          >
+            게임 로직 정보
+          </h2>
+          <div class="text-base space-y-4">
+            <p class="leading-relaxed">
+              이 시뮬레이션은 실제 카지노와 동일한 8덱의 카드를 사용하며, 정확한
+              바카라 규칙에 따라 구현되었습니다.
+            </p>
+            <div class="bg-black/30 p-4 rounded">
+              <p class="text-yellow-400 mb-3">주요 게임 로직:</p>
+              <ul class="space-y-2 text-gray-300">
+                <li>• 8덱 (416장) 사용</li>
+                <li>• 내추럴 8, 9 우선 체크</li>
+                <li>• 플레이어 5점 이하 드로우</li>
+                <li>• 뱅커는 상황별 드로우 규칙 적용</li>
+                <li>• 실제 카지노와 동일한 확률 구현</li>
+              </ul>
+            </div>
+            <p class="text-gray-400 mt-2">
+              * 모든 카드는 무작위로 셔플되며, 덱이 소진되면 자동으로
+              리셔플됩니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer 섹션 -->
+    <footer class="mt-8 py-6 bg-[#0a0a0a] border-t border-[#d4af37]/30">
+      <div class="max-w-[1800px] mx-auto px-8">
+        <div class="flex justify-between items-start">
+          <div class="text-[#d4af37]">
+            <h3 class="text-xl font-bold mb-2">BACCARAT SIMULATION</h3>
+            <p class="text-sm text-gray-400">
+              © 2024 BACCARAT SIMULATION. All rights reserved.
+            </p>
+            <div class="mt-4 space-x-4">
+              <a
+                href="https://sungblab.vercel.app/blog"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-[#d4af37] transition-colors"
+              >
+                Blog
+              </a>
+              <span class="text-gray-600">|</span>
+              <a
+                href="https://github.com/sungblab"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-[#d4af37] transition-colors"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm text-gray-400">
+              이 시뮬레이션은 교육 목적으로만 제작되었으며,<br />
+              실제 도박을 조장하지 않습니다.
+            </p>
+            <p class="text-xs text-gray-500 mt-2">
+              버전 1.0.0 | 최종 업데이트: 2024.01
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 로컬 스토리지 키
+      const STORAGE_KEY = "baccarat_game_history";
+
+      // 게임 결과 저장 함수
+      function saveGameResult(result) {
+        let gameHistory = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        gameHistory.push({
+          ...result,
+          timestamp: new Date().toISOString(),
+        });
+
+        // 최대 100개까지만 저장
+        if (gameHistory.length > 100) {
+          gameHistory = gameHistory.slice(-100);
+        }
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(gameHistory));
+        updateStats();
+      }
+
+      // 통계 업데이트 함수
+      function updateStats() {
+        const gameHistory = JSON.parse(
+          localStorage.getItem(STORAGE_KEY) || "[]"
+        );
+        const grid = document.getElementById("recentResultsGrid");
+        grid.innerHTML = "";
+
+        // 결과를 열로 그룹화
+        let columns = [];
+        let currentColumn = {
+          result: null,
+          results: [],
+        };
+
+        // 최근 36개의 게임 결과를 처리
+        gameHistory.slice(-36).forEach((game) => {
+          if (currentColumn.result === null) {
+            currentColumn.result = game.result;
+            currentColumn.results.push(game.result);
+          } else if (currentColumn.result === game.result) {
+            currentColumn.results.push(game.result);
+          } else {
+            columns.push({ ...currentColumn });
+            currentColumn = {
+              result: game.result,
+              results: [game.result],
+            };
+          }
+        });
+
+        // 마지막 열 추가
+        if (currentColumn.result !== null) {
+          columns.push(currentColumn);
+        }
+
+        // 열을 표시
+        columns.forEach((column) => {
+          const colDiv = document.createElement("div");
+          colDiv.className = "flex flex-col gap-1";
+
+          column.results.forEach((result) => {
+            const resultDiv = document.createElement("div");
+            resultDiv.className =
+              "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold";
+
+            if (result === "player") {
+              resultDiv.className += " border-2 border-blue-500 text-blue-500";
+              resultDiv.textContent = "P";
+            } else if (result === "banker") {
+              resultDiv.className += " border-2 border-red-500 text-red-500";
+              resultDiv.textContent = "B";
+            } else {
+              resultDiv.className +=
+                " border-2 border-green-500 text-green-500";
+              resultDiv.textContent = "T";
+            }
+
+            colDiv.appendChild(resultDiv);
+          });
+
+          grid.appendChild(colDiv);
+        });
+
+        // 승률 계산 및 업데이트
+        const totalGames = gameHistory.length;
+        if (totalGames > 0) {
+          const playerWins = gameHistory.filter(
+            (g) => g.result === "player"
+          ).length;
+          const bankerWins = gameHistory.filter(
+            (g) => g.result === "banker"
+          ).length;
+          const ties = gameHistory.filter((g) => g.result === "tie").length;
+
+          document.getElementById("playerWinRate").textContent = `${(
+            (playerWins / totalGames) *
+            100
+          ).toFixed(1)}%`;
+          document.getElementById("bankerWinRate").textContent = `${(
+            (bankerWins / totalGames) *
+            100
+          ).toFixed(1)}%`;
+          document.getElementById("tieRate").textContent = `${(
+            (ties / totalGames) *
+            100
+          ).toFixed(1)}%`;
+        }
+      }
+
+      class BaccaratScene extends Phaser.Scene {
+        constructor() {
+          super({ key: "BaccaratScene" });
+          this.deck = [];
+          this.playerHand = [];
+          this.bankerHand = [];
+          this.numberOfDecks = 8;
+          this.reshufflePoint = 52 * 2;
+          this.gameSpeed = 1; // 기본 게임 속도
+        }
+
+        preload() {
+          const suits = ["hearts", "diamonds", "clubs", "spades"];
+          const values = [
+            "A",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0",
+            "J",
+            "Q",
+            "K",
+          ];
+
+          suits.forEach((suit) => {
+            values.forEach((value) => {
+              const cardKey = `${value}${suit}`;
+              const imageUrl = `https://deckofcardsapi.com/static/img/${value}${suit
+                .charAt(0)
+                .toUpperCase()}.png`;
+              this.load.image(cardKey, imageUrl);
+            });
+          });
+
+          // 결과 사운드 로드
+          this.load.audio("playerWin", "player.mp3");
+          this.load.audio("bankerWin", "banker.mp3");
+          this.load.audio("tieGame", "tie.mp3");
+        }
+
+        create() {
+          // 테이블 배경 - 단색으로 변경
+          const tableBackground = this.add.graphics();
+          tableBackground.fillStyle(0x006400, 1); // 진한 초록색
+          tableBackground.fillRect(0, 0, 1000, 500);
+
+          // 테이블 그라데이션 (여러 레이어로 구현)
+          const gradientTop = this.add.graphics();
+          gradientTop.fillStyle(0x004d00, 0.3);
+          gradientTop.fillRect(0, 0, 1000, 100);
+
+          const gradientBottom = this.add.graphics();
+          gradientBottom.fillStyle(0x004d00, 0.3);
+          gradientBottom.fillRect(0, 400, 1000, 100);
+
+          // 테이블 테두리
+          const border = this.add.graphics();
+          border.lineStyle(4, 0xb8860b, 1);
+          border.strokeRect(10, 10, 980, 480);
+
+          // 중앙 구분선
+          const centerLine = this.add.graphics();
+          centerLine.lineStyle(3, 0xb8860b, 1);
+          centerLine.beginPath();
+          centerLine.moveTo(500, 50);
+          centerLine.lineTo(500, 450);
+          centerLine.strokePath();
+
+          // 플레이어/뱅커 영역 표시
+          this.addTableArea(300, 200, "PLAYER");
+          this.addTableArea(700, 200, "BANKER");
+
+          // 텍스트 스타일
+          const textStyle = {
+            fontSize: "28px",
+            fontFamily: "Noto Serif KR",
+            color: "#ffffff",
+            fontWeight: "bold",
+            resolution: 2,
+            stroke: "#000000",
+            strokeThickness: 1,
+          };
+
+          // 결과 텍스트 스타일
+          const resultStyle = {
+            fontSize: "32px",
+            fontFamily: "Noto Serif KR",
+            color: "#ffd700",
+            fontWeight: "bold",
+          };
+
+          // 텍스트 초기화
+          this.playerText = this.add
+            .text(300, 50, "PLAYER", textStyle)
+            .setOrigin(0.5);
+          this.bankerText = this.add
+            .text(700, 50, "BANKER", textStyle)
+            .setOrigin(0.5);
+          this.playerScoreText = this.add
+            .text(300, 350, "", textStyle)
+            .setOrigin(0.5);
+          this.bankerScoreText = this.add
+            .text(700, 350, "", textStyle)
+            .setOrigin(0.5);
+          this.resultText = this.add
+            .text(500, 450, "", resultStyle)
+            .setOrigin(0.5);
+          this.deckCountText = this.add
+            .text(500, 30, "", {
+              fontSize: "24px",
+              fontFamily: "Noto Serif KR",
+              color: "#ffffff",
+            })
+            .setOrigin(0.5);
+
+          // 초기화
+          this.initializeDeck();
+          this.updateDeckCount();
+        }
+
+        initializeDeck() {
+          const suits = ["hearts", "diamonds", "clubs", "spades"];
+          const values = [
+            "A",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0",
+            "J",
+            "Q",
+            "K",
+          ];
+          this.deck = [];
+
+          // 8덱 생성
+          for (let d = 0; d < this.numberOfDecks; d++) {
+            for (let suit of suits) {
+              for (let value of values) {
+                this.deck.push({
+                  suit,
+                  value,
+                  id: `${value}${suit}_${d}`,
+                });
+              }
+            }
+          }
+
+          this.shuffleDeck();
+          this.showShuffleAnimation();
+        }
+
+        shuffleDeck() {
+          for (let i = this.deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
+          }
+        }
+
+        async showShuffleAnimation() {
+          const shuffleText = this.add
+            .text(500, 250, "셔플 중...", {
+              fontSize: "48px",
+              fontFamily: "Noto Serif KR",
+              color: "#ffd700",
+              fontWeight: "bold",
+            })
+            .setOrigin(0.5);
+
+          this.tweens.add({
+            targets: shuffleText,
+            alpha: { from: 1, to: 0 },
+            duration: 1000,
+            ease: "Power2",
+            onComplete: () => {
+              shuffleText.destroy();
+            },
+          });
+        }
+
+        updateDeckCount() {
+          const remainingCards = this.deck.length;
+          const remainingDecks = (remainingCards / 52).toFixed(1);
+          this.deckCountText.setText(`남은 덱: ${remainingDecks}`);
+
+          if (remainingCards <= this.reshufflePoint) {
+            this.initializeDeck();
+          }
+        }
+
+        drawNextCard() {
+          if (this.deck.length < 1) {
+            this.initializeDeck();
+          }
+          const card = this.deck.pop();
+          this.updateDeckCount();
+          return card;
+        }
+
+        async dealCard(recipient, index) {
+          const card = this.drawNextCard();
+          const hand =
+            recipient === "player" ? this.playerHand : this.bankerHand;
+          hand.push(card);
+
+          const cardSprite = this.add.image(
+            500,
+            -50,
+            `${card.value}${card.suit}`
+          );
+          cardSprite.setScale(0.4);
+          cardSprite.setRotation(Math.PI);
+
+          const shadow = this.add.rectangle(500, -50, 140, 190, 0x000000, 0.3);
+          shadow.setOrigin(0.5);
+          shadow.setScale(0.4);
+          shadow.setDepth(0);
+          cardSprite.setDepth(1);
+
+          const endX =
+            recipient === "player" ? 200 + index * 100 : 600 + index * 100;
+          const endY = 200;
+
+          return new Promise((resolve) => {
+            this.tweens.add({
+              targets: [cardSprite, shadow],
+              x: endX,
+              y: endY,
+              rotation: 0,
+              duration: 500,
+              ease: "Back.easeOut",
+              onComplete: () => {
+                this.tweens.add({
+                  targets: [cardSprite, shadow],
+                  scaleX: 0.42,
+                  scaleY: 0.42,
+                  duration: 100,
+                  yoyo: true,
+                  ease: "Quad.easeInOut",
+                  onComplete: () => {
+                    this.updateScores();
+                    resolve();
+                  },
+                });
+              },
+            });
+          });
+        }
+
+        checkNatural() {
+          const playerScore = this.calculateHandValue(this.playerHand);
+          const bankerScore = this.calculateHandValue(this.bankerHand);
+
+          if (playerScore.total >= 8 || bankerScore.total >= 8) {
+            this.resultText.setText(
+              `내추럴 ${Math.max(playerScore.total, bankerScore.total)}`
+            );
+            this.showGameResult(playerScore.total, bankerScore.total);
+            return true;
+          }
+          return false;
+        }
+
+        showGameResult(playerScore, bankerScore) {
+          let resultText = "";
+          let resultColor = "#ffd700";
+
+          if (playerScore > bankerScore) {
+            resultText = "PLAYER WIN!";
+            resultColor = "#00ff00";
+            this.sound.play("playerWin");
+          } else if (playerScore < bankerScore) {
+            resultText = "BANKER WIN!";
+            resultColor = "#ff0000";
+            this.sound.play("bankerWin");
+          } else {
+            resultText = "TIE!";
+            resultColor = "#ffffff";
+            this.sound.play("tieGame");
+          }
+
+          this.resultText.setText(resultText);
+          this.resultText.setColor(resultColor);
+        }
+
+        delay(ms) {
+          return new Promise((resolve) =>
+            setTimeout(resolve, ms * this.gameSpeed)
+          );
+        }
+
+        calculateHandValue(hand) {
+          let value = 0;
+          let calculation = [];
+
+          for (let card of hand) {
+            let cardValue = 0;
+            if (["J", "Q", "K", "0"].includes(card.value)) {
+              cardValue = 0;
+            } else if (card.value === "A") {
+              cardValue = 1;
+            } else {
+              cardValue = parseInt(card.value);
+            }
+            value = (value + cardValue) % 10;
+            calculation.push(cardValue);
+          }
+
+          return {
+            total: value,
+            calculation: calculation.join(" + "),
+          };
+        }
+
+        updateScores() {
+          const playerScore = this.calculateHandValue(this.playerHand);
+          const bankerScore = this.calculateHandValue(this.bankerHand);
+
+          this.playerScoreText.setText(
+            `${playerScore.calculation} = ${playerScore.total}`
+          );
+          this.bankerScoreText.setText(
+            `${bankerScore.calculation} = ${bankerScore.total}`
+          );
+        }
+
+        async dealInitialCards() {
+          await this.dealCard("player", 0);
+          await this.delay(500);
+          await this.dealCard("banker", 0);
+          await this.delay(500);
+          await this.dealCard("player", 1);
+          await this.delay(500);
+          await this.dealCard("banker", 1);
+          await this.delay(500);
+
+          const natural = this.checkNatural();
+          if (!natural) {
+            const playerScore = this.calculateHandValue(this.playerHand);
+            const bankerScore = this.calculateHandValue(this.bankerHand);
+
+            let playerThirdCard = null;
+
+            if (playerScore.total <= 5) {
+              await this.dealCard("player", 2);
+              await this.delay(500);
+              playerThirdCard = this.playerHand[2];
+            }
+
+            if (this.shouldBankerDraw(bankerScore.total, playerThirdCard)) {
+              await this.dealCard("banker", 2);
+              await this.delay(500);
+            }
+          }
+        }
+
+        shouldBankerDraw(bankerScore, playerThirdCard) {
+          if (bankerScore <= 2) return true;
+          if (bankerScore >= 7) return false;
+          if (!playerThirdCard) return bankerScore <= 5;
+
+          const playerThirdValue = this.getCardValue(playerThirdCard);
+
+          switch (bankerScore) {
+            case 3:
+              return playerThirdValue !== 8;
+            case 4:
+              return [2, 3, 4, 5, 6, 7].includes(playerThirdValue);
+            case 5:
+              return [4, 5, 6, 7].includes(playerThirdValue);
+            case 6:
+              return [6, 7].includes(playerThirdValue);
+            default:
+              return false;
+          }
+        }
+
+        getCardValue(card) {
+          if (!card) return null;
+          if (["J", "Q", "K", "0"].includes(card.value)) return 0;
+          if (card.value === "A") return 1;
+          return parseInt(card.value);
+        }
+
+        addTableArea(x, y, text) {
+          const area = this.add.graphics();
+          area.lineStyle(2, 0xb8860b, 0.5);
+          area.beginPath();
+          area.arc(x, y + 50, 180, 0, Math.PI, true);
+          area.strokePath();
+
+          const textStyle = {
+            fontSize: "28px",
+            fontFamily: "Noto Serif KR",
+            color: "#ffd700",
+            fontWeight: "bold",
+            stroke: "#000000",
+            strokeThickness: 2,
+            shadow: {
+              offsetX: 2,
+              offsetY: 2,
+              color: "#000000",
+              blur: 2,
+              fill: true,
+            },
+          };
+
+          this.add.text(x, y - 150, text, textStyle).setOrigin(0.5);
+        }
+
+        async dealCards() {
+          // 이전 카드와 결과 초기화
+          this.children.list
+            .filter((child) => child.type === "Image")
+            .forEach((card) => card.destroy());
+
+          this.playerHand = [];
+          this.bankerHand = [];
+          this.resultText.setText("");
+          this.playerScoreText.setText("");
+          this.bankerScoreText.setText("");
+
+          // 카드 배분 로직
+          await this.dealInitialCards();
+
+          // 결과 계산
+          const finalPlayerScore = this.calculateHandValue(this.playerHand);
+          const finalBankerScore = this.calculateHandValue(this.bankerHand);
+
+          // 결과 표시
+          this.showGameResult(finalPlayerScore.total, finalBankerScore.total);
+
+          // 게임 결과 저장
+          const gameResult = {
+            result:
+              finalPlayerScore.total > finalBankerScore.total
+                ? "player"
+                : finalPlayerScore.total < finalBankerScore.total
+                ? "banker"
+                : "tie",
+            playerScore: finalPlayerScore.total,
+            bankerScore: finalBankerScore.total,
+          };
+
+          // 로컬 스토리지에 결과 저장
+          saveGameResult(gameResult);
+        }
+      }
+
+      const config = {
+        type: Phaser.CANVAS,
+        width: 1000,
+        height: 500,
+        parent: "gameContainer",
+        scene: BaccaratScene,
+        audio: {
+          disableWebAudio: true,
+        },
+        render: {
+          antialias: true,
+          pixelArt: false,
+          roundPixels: false,
+          clearBeforeRender: true,
+          premultipliedAlpha: true,
+        },
+        scale: {
+          mode: Phaser.Scale.FIT,
+          autoCenter: Phaser.Scale.CENTER_BOTH,
+          zoom: 1 / window.devicePixelRatio,
+        },
+        backgroundColor: "#006400",
+      };
+
+      const game = new Phaser.Game(config);
+
+      // 버튼 이벤트 리스너 추가
+      document.getElementById("shuffleButton").addEventListener("click", () => {
+        if (game.scene && game.scene.scenes[0]) {
+          game.scene.scenes[0].initializeDeck();
+        }
+      });
+
+      document.getElementById("playButton").addEventListener("click", () => {
+        const scene = game.scene.scenes[0];
+        if (scene) {
+          scene.dealCards();
+        }
+      });
+
+      // 초기화 버튼 이벤트 리스너 추가
+      document.getElementById("resetButton").addEventListener("click", () => {
+        if (confirm("정말 모든 게임 기록을 초기화하시겠습니까?")) {
+          localStorage.removeItem(STORAGE_KEY);
+          updateStats();
+        }
+      });
+
+      // 게임 속도 조절 이벤트 리스너 추가
+      document.getElementById("gameSpeed").addEventListener("change", (e) => {
+        if (game.scene && game.scene.scenes[0]) {
+          game.scene.scenes[0].gameSpeed = parseFloat(e.target.value);
+        }
+      });
+
+      // 초기 통계 로드
+      updateStats();
+    </script>
+  </body>
+</html>
